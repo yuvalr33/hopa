@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --blue:  #5B5FED;
+  --light: #EEF0FF;
+  --dark:  #1A1A2E;
+  --green: #22C55E;
+  --gray:  #F4F5FF;
+  --muted: #888;
+  --border: #EEEEFF;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--gray);
+  min-height: 100vh;
+  direction: rtl;
+}
+
+/* ── Phone shell ── */
+.phone {
+  width: 390px;
+  min-height: 844px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 44px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(91,95,237,0.18);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+@media (max-width: 440px) {
+  .phone {
+    width: 100vw;
+    min-height: 100dvh;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+.screen { flex: 1; display: flex; flex-direction: column; }
+
+/* ── Buttons ── */
+.btn-primary {
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 16px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: opacity .15s, transform .1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.btn-primary:hover  { opacity: .9; transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary:disabled { opacity: .38; cursor: not-allowed; transform: none; }
+
+.btn-secondary {
+  background: var(--light);
+  color: var(--blue);
+  border: none;
+  border-radius: 14px;
+  padding: 16px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: opacity .15s;
+}
+.btn-secondary:hover { opacity: .8; }
+
+/* ── Inputs ── */
+.input-group { display: flex; flex-direction: column; gap: 6px; }
+.input-label { font-size: 13px; font-weight: 600; color: #555; }
+
+.input-field {
+  background: var(--gray);
+  border: 1.5px solid transparent;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  color: var(--dark);
+  outline: none;
+  transition: border-color .2s;
+  width: 100%;
+  direction: rtl;
+}
+.input-field:focus    { border-color: var(--blue); }
+.input-field::placeholder { color: #bbb; }
+select.input-field    { appearance: none; cursor: pointer; }
+
+/* ── Cards ── */
+.ride-card {
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 18px;
+  padding: 16px;
+  cursor: pointer;
+  transition: box-shadow .2s, transform .15s;
+}
+.ride-card:hover {
+  box-shadow: 0 8px 24px rgba(91,95,237,.12);
+  transform: translateY(-2px);
+}
+
+/* ── Bottom Nav ── */
+.bottom-nav {
+  display: flex;
+  border-top: 1px solid var(--border);
+  background: #fff;
+}
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 8px 16px;
+  cursor: pointer;
+  gap: 3px;
+  color: #ccc;
+  font-size: 11px;
+  font-weight: 500;
+  border: none;
+  background: none;
+  font-family: 'Outfit', sans-serif;
+  transition: color .15s;
+  text-decoration: none;
+}
+.nav-item.active { color: var(--blue); }
+.nav-item:hover  { color: var(--blue); }
+
+/* ── Screen header ── */
+.screen-header {
+  display: flex;
+  align-items: center;
+  padding: 52px 20px 16px;
+  background: #fff;
+  border-bottom: 1px solid #F0F0FF;
+  gap: 12px;
+}
+.back-btn {
+  background: var(--light);
+  border: none;
+  border-radius: 10px;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  text-decoration: none;
+  color: var(--dark);
+}
+
+/* ── Tag ── */
+.tag {
+  display: inline-block;
+  background: var(--light);
+  color: var(--blue);
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.divider { height: 1px; background: #F0F0FF; margin: 8px 0; }
+
+/* ── Animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeIn .35s ease forwards; }
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.06); }
+}
+.pulse { animation: pulse 2s ease infinite; }
+
+@keyframes checkIn {
+  0%   { transform: scale(0) rotate(-20deg); opacity: 0; }
+  60%  { transform: scale(1.2) rotate(5deg); }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+.check-in { animation: checkIn .5s cubic-bezier(.34,1.56,.64,1) forwards; }
+
+/* ── Page wrapper (centers phone on desktop) ── */
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+}

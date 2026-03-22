@@ -1,6 +1,9 @@
 'use client';
 import Link from 'next/link';
 import HoppaLogo from '@/components/HoppaLogo';
+import { signIn } from 'next-auth/react';
+import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 function GoogleIcon() {
   return (
@@ -13,7 +16,10 @@ function GoogleIcon() {
   );
 }
 
-export default function WelcomePage() {
+function WelcomeContent() {
+  const searchParams = useSearchParams();
+  const error = searchParams.get('error');
+
   return (
     <div style={{ flex:1, display:'flex', flexDirection:'column', padding:'48px 28px 40px' }} className="fade-in">
       <div style={{ flex:1, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:12 }}>
@@ -30,16 +36,29 @@ export default function WelcomePage() {
       </div>
 
       <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
-        <Link href="/profile" style={{ textDecoration:'none' }}>
-          <button className="btn-primary"><GoogleIcon /> כניסה עם Google</button>
-        </Link>
-        <Link href="/profile" style={{ textDecoration:'none' }}>
-          <button className="btn-secondary">הרשמה עם מייל אוניברסיטאי</button>
-        </Link>
+        {error === 'AccessDenied' && (
+          <div style={{ color:'red', textAlign:'center', fontSize:14, marginBottom:8 }}>
+            שגיאה: הכניסה מותרת רק למייל המורשה
+          </div>
+        )}
+        <button 
+          className="btn-primary" 
+          onClick={() => signIn('google', { callbackUrl: '/profile' })}
+        >
+          <GoogleIcon /> כניסה עם Google
+        </button>
         <p style={{ textAlign:'center', fontSize:12, color:'#ccc', marginTop:4 }}>
           בכניסה אתה מסכים לתנאי השימוש ומדיניות הפרטיות
         </p>
       </div>
     </div>
+  );
+}
+
+export default function WelcomePage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <WelcomeContent />
+    </Suspense>
   );
 }

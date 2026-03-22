@@ -1,5 +1,5 @@
 import './globals.css';
-import AuthProvider from '@/components/AuthProvider';
+import Providers from '@/components/Providers';
 
 export const metadata = {
   title: 'Hoppa — Your Campus Ride',
@@ -10,14 +10,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="he" dir="rtl">
       <body>
-        <AuthProvider>
+        <Providers>
           <div className="page-wrapper">
             <div className="phone">
               {children}
             </div>
           </div>
-        </AuthProvider>
+        </Providers>
       </body>
     </html>
   );
 }
+

@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import HoppaLogo from '@/components/HoppaLogo';
-import { signIn } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 
@@ -17,6 +17,7 @@ function GoogleIcon() {
 }
 
 function WelcomeContent() {
+  const { data: session } = useSession();
   const searchParams = useSearchParams();
   const error = searchParams.get('error');
 
@@ -36,20 +37,35 @@ function WelcomeContent() {
       </div>
 
       <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
-        {error === 'AccessDenied' && (
-          <div style={{ color:'red', textAlign:'center', fontSize:14, marginBottom:8 }}>
-            שגיאה: הכניסה מותרת רק למייל המורשה
+        {session ? (
+          <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <p style={{ fontWeight: 600, color: '#1A1A2E' }}>
+              מחובר בתור: {session.user?.name || session.user?.email}
+            </p>
+            <Link href="/home" style={{ textDecoration: 'none' }}>
+              <button className="btn-primary">לעמוד הבית</button>
+            </Link>
+            <button 
+              className="btn-secondary" 
+              onClick={() => signOut()}
+              style={{ padding: '12px', borderRadius: '12px', border: '1px solid #ddd', background: '#fff', color: '#555', cursor: 'pointer', fontWeight: 600, fontFamily: 'inherit' }}
+            >
+              התנתק
+            </button>
           </div>
+        ) : (
+          <>
+            <button 
+              className="btn-primary" 
+              onClick={() => signIn('google', { callbackUrl: '/home' })}
+            >
+              <GoogleIcon /> כניסה עם Google
+            </button>
+            <p style={{ textAlign:'center', fontSize:12, color:'#ccc', marginTop:4 }}>
+              בכניסה אתה מסכים לתנאי השימוש ומדיניות הפרטיות
+            </p>
+          </>
         )}
-        <button 
-          className="btn-primary" 
-          onClick={() => signIn('google', { callbackUrl: '/profile' })}
-        >
-          <GoogleIcon /> כניסה עם Google
-        </button>
-        <p style={{ textAlign:'center', fontSize:12, color:'#ccc', marginTop:4 }}>
-          בכניסה אתה מסכים לתנאי השימוש ומדיניות הפרטיות
-        </p>
       </div>
     </div>
   );
@@ -62,3 +78,4 @@ export default function WelcomePage() {
     </Suspense>
   );
 }
+

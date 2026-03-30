@@ -1,5 +1,12 @@
+import { Heebo } from 'next/font/google';
 import './globals.css';
 import Providers from '@/components/Providers';
+
+const heebo = Heebo({
+  subsets: ['hebrew', 'latin'],
+  display: 'swap',
+  variable: '--font-heebo',
+});
 
 export const metadata = {
   title: 'Hoppa — Your Campus Ride',
@@ -8,7 +15,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="he" dir="rtl">
+    <html lang="he" dir="rtl" className={`${heebo.variable} font-heebo`}>
       <body>
         <Providers>
           <div className="page-wrapper">

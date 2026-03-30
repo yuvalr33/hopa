@@ -58,9 +58,10 @@ module.exports = {
         "on-primary-fixed-variant": "#0e29cf"
       },
       fontFamily: {
-        "headline": ["Plus Jakarta Sans", "Inter", "sans-serif"],
-        "body": ["Inter", "sans-serif"],
-        "label": ["Inter", "sans-serif"]
+        heebo: ["var(--font-heebo)", "sans-serif"],
+        headline: ["var(--font-heebo)", "sans-serif"],
+        body: ["var(--font-heebo)", "sans-serif"],
+        label: ["var(--font-heebo)", "sans-serif"]
       },
       borderRadius: {
         "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"

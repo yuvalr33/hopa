@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 
 export default function HomePage() {
   return (
@@ -12,13 +13,13 @@ export default function HomePage() {
             <span className="material-symbols-outlined text-primary text-2xl" style={{ fontVariationSettings: "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24" }}>menu</span>
             <h1 className="font-headline font-black italic text-xl tracking-tight text-[#3045e3] dark:text-[#4D61FC]">Hopp</h1>
           </div>
-          <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20 bg-surface-container-high">
+          <Link href="/profile" className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20 bg-surface-container-high block">
             <img 
               alt="Student Profile Avatar" 
               className="w-full h-full object-cover" 
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzsBF1LlX5pDUKLwAVTvQQnEZBcocuCOUS63MF5JyzZiMy0n_RqSuAjxHHhv_mc9FMinA2EyUorIZP9FDd1ViqnjbehC85JXZuxCj1nxEyQPtVVrKlpbC8TlSdGENq0T7Pi-Bg5e-43fKR9VKiifJAypXkqFTPNH0xOZmQ1s90UoIGzqGUaiSgMjAPJzRTuF1iNrBaaGOk6zS70hhoKak26CqHXf3OcOlWfx7Os2CAkzPMbGsL5r6nSwVhFH6LTsZgBlmyxQPTMk4"
             />
-          </div>
+          </Link>
         </div>
       </header>
 
@@ -27,7 +28,7 @@ export default function HomePage() {
         <section className="space-y-4 pt-2">
           <div className="flex justify-between items-end">
             <h2 className="font-headline font-bold text-2xl tracking-tight text-on-surface">לאן נוסעים?</h2>
-            <span className="text-primary font-label text-sm font-semibold">הצג הכל</span>
+            <Link href="/search" className="text-primary font-label text-sm font-semibold hover:underline">הצג הכל</Link>
           </div>
           <div className="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6 hide-scrollbar">
             {/* Suggestion 1 */}
@@ -111,9 +112,11 @@ export default function HomePage() {
                 <h2 className="font-headline font-extrabold text-2xl text-white tracking-tight leading-tight">עוזבים את הקמפוס?<br/>שתפו מקומות</h2>
                 <p className="text-white/80 font-body text-sm max-w-xs leading-relaxed">החזירו את הוצאות הדלק והכירו סטודנטים בדרך החוצה.</p>
               </div>
-              <button className="bg-white text-primary px-6 py-3.5 rounded-full font-label font-black text-sm uppercase tracking-wider shadow-lg active:scale-95 transition-transform w-max">
-                פרסם נסיעה
-              </button>
+              <Link href="/create" style={{ display: 'inline-block' }}>
+                <button className="bg-white text-primary px-6 py-3.5 rounded-full font-label font-black text-sm uppercase tracking-wider shadow-lg active:scale-95 transition-transform w-max">
+                  פרסם נסיעה
+                </button>
+              </Link>
             </div>
           </div>
         </section>
@@ -128,10 +131,10 @@ export default function HomePage() {
               alt="Campus Map"
             />
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-white/95 backdrop-blur px-5 py-2.5 rounded-full flex items-center gap-2 shadow-lg border border-primary/10">
+              <Link href="/search" className="bg-white/95 backdrop-blur px-5 py-2.5 rounded-full flex items-center gap-2 shadow-lg border border-primary/10 hover:bg-white transition flex overflow-hidden cursor-pointer" style={{textDecoration:'none'}}>
                 <span className="material-symbols-outlined text-primary text-sm">explore</span>
                 <span className="text-xs font-bold text-on-surface">12 נסיעות פעילות בקרבת מקום</span>
-              </div>
+              </Link>
             </div>
           </div>
         </section>
@@ -140,15 +143,15 @@ export default function HomePage() {
       {/* Bottom Navigation Bar */}
       <nav className="absolute bottom-0 left-0 w-full bg-surface/90 dark:bg-slate-900/90 backdrop-blur-2xl flex justify-around items-center px-4 pb-8 pt-4 z-50 rounded-t-[3rem] shadow-[0_-12px_30px_-4px_rgba(26,28,30,0.08)] lg:rounded-b-[44px]">
         {/* Home (Active) */}
-        <a className="flex flex-col items-center justify-center bg-gradient-to-br from-[#3045e3] to-[#4D61FC] text-white rounded-full px-6 py-2 shadow-lg shadow-blue-500/20 active:scale-90 transition-all duration-300 ease-out" href="#">
+        <Link className="flex flex-col items-center justify-center bg-gradient-to-br from-[#3045e3] to-[#4D61FC] text-white rounded-full px-6 py-2 shadow-lg shadow-blue-500/20 active:scale-90 transition-all duration-300 ease-out" href="/home">
           <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>home</span>
           <span className="font-label font-semibold text-[11px] uppercase tracking-wider mt-0.5">ראשי</span>
-        </a>
+        </Link>
         {/* Trips */}
-        <a className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-2 hover:text-[#3045e3] dark:hover:text-[#4D61FC] transition-colors active:scale-90 transition-all duration-300 ease-out" href="#">
+        <Link className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-2 hover:text-[#3045e3] dark:hover:text-[#4D61FC] transition-colors active:scale-90 transition-all duration-300 ease-out" href="/rides">
           <span className="material-symbols-outlined">directions_car</span>
           <span className="font-label font-semibold text-[11px] uppercase tracking-wider mt-0.5">נסיעות</span>
-        </a>
+        </Link>
         {/* Alerts */}
         <a className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-2 hover:text-[#3045e3] dark:hover:text-[#4D61FC] transition-colors active:scale-90 transition-all duration-300 ease-out relative" href="#">
           <span className="material-symbols-outlined">notifications</span>

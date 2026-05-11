@@ -1,32 +1,22 @@
 'use client';
+
+import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 export default function BottomNav() {
-  const path = usePathname();
-
   return (
-    <div className="bottom-nav">
-      <Link href="/home"   className={`nav-item ${path==='/home'   ?'active':''}`}>
-        <span style={{fontSize:20}}>🏠</span> בית
+    <nav className="absolute bottom-0 w-full bg-[#2260FF] text-white flex justify-evenly items-center py-5 pb-8 z-20 lg:rounded-b-[30px]" dir="rtl">
+      {/* Car - My Rides (Right in RTL - first child) */}
+      <Link href="/rides" className="flex flex-col items-center justify-center gap-1.5 opacity-100 hover:scale-105 transition-transform flex-1">
+        <img src="/images2/Icon (1).svg" alt="הנסיעות שלי" className="w-[18px] h-[16px]" />
+        <span className="font-bold text-[13px]">הנסיעות שלי</span>
       </Link>
-      <Link href="/search" className={`nav-item ${path==='/search' ?'active':''}`}>
-        <span style={{fontSize:20}}>🔍</span> חיפוש
+
+      {/* Home (Left in RTL - second child) */}
+      <Link href="/home" className="flex flex-col items-center justify-center gap-1.5 opacity-100 hover:scale-105 transition-transform flex-1">
+        <img src="/images2/Icon (2).svg" alt="בית" className="w-[16px] h-[18px]" />
+        <span className="font-bold text-[13px]">בית</span>
       </Link>
-      <Link href="/create" className="nav-item">
-        <div style={{
-          background:'#5B5FED', borderRadius:14, width:48, height:48,
-          display:'flex', alignItems:'center', justifyContent:'center',
-          fontSize:26, color:'#fff', marginTop:-22,
-          boxShadow:'0 4px 20px rgba(91,95,237,.5)',
-        }}>+</div>
-      </Link>
-      <Link href="/rides"  className={`nav-item ${path==='/rides'  ?'active':''}`}>
-        <span style={{fontSize:20}}>🎟️</span> נסיעות
-      </Link>
-      <Link href="/profile" className={`nav-item ${path==='/profile'?'active':''}`}>
-        <span style={{fontSize:20}}>👤</span> פרופיל
-      </Link>
-    </div>
+    </nav>
   );
 }
